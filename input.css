@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+.nav-link{
+    @apply text-lg font-bold duration-300;
+}
+
+.nav-link:hover{
+    @apply text-green-950;
+}
+
+section{
+    @apply py-20;
+}
+h1{
+    @apply text-5xl md:text-4xl xl:text-5xl font-bold;
+}

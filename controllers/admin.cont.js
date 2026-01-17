@@ -1,30 +1,30 @@
 const admin=require("../modules/admin.mod.js")
 const products=require("../modules/prod.mod.js")
 
-const postProducts = async (req, res) => {
-    const { name,description, image, category,brand } = req.body;
-    const { userid } = req.user;
+    const postProducts = async (req, res) => {
+        const { name,description, image, category,brand } = req.body;
+        const { userid } = req.user;
+        // { "name":"adol","description":"kl", "image":"asjkdhaskhduwhdn", "category":"medicine","brand":"sanofi" }
+        try {
+            const admins = await admin.findById(userid);
     
-    try {
-        const admins = await admin.findById(userid);
-   
-        const newproduct = new products({
-           name,
-            description,
-           image,
-         category, 
-           brand
-           
-        });
-       
-        await newproduct.save();
+            const newproduct = new products({
+            name,
+                description,
+            image,
+            category, 
+            brand
+            
+            });
+        
+            await newproduct.save();
 
-        res.status(200).json({ success: true, message: "Product added successfully" });
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Something went wrong in adding a product" });
-    }
-};
+            res.status(200).json({ success: true, message: "Product added successfully" });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: "Something went wrong in adding a product" });
+        }
+    };
 
 const viewProducts=async(req,res)=>{
     const {userid}=req.user;
