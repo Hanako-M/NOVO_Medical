@@ -2,8 +2,8 @@ const {Router} = require("express")
 const controller = require("../controllers/auth.cont.js")
 const router = Router()
 
-router.post("/admin/signup", controller.adminSignUp);
-router.post("/admin/signin", controller.signIn);
-router.get("/admin/signout", controller.signOut);
+router.post("/signup", controller.adminSignUp);
+router.post("/signin", controller.signIn);
+router.get("/signout", controller.signOut);
 
 module.exports = router;

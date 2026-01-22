@@ -16,13 +16,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="./output.css" rel="stylesheet">
 </head>
-<body class="bg-white">
+<body>
     <header id="navbar" class="bg-teal-500 text-white fixed w-full top-0 left-0 z-50 font-sans">
   <nav class="container mx-auto flex items-center justify-between h-16 sm:h-20 px-4 sm:px-6 lg:px-8">
 
     <!-- Logo -->
     <div class="flex-shrink-0">
-      <img src="assets/img/novologo1.png" alt="NOVO Medical Logo" class="h-12 sm:h-16 w-auto">
+      <img src="assets/img/imagelogo.png" alt="NOVO Medical Logo" class="h-12 sm:h-16 w-auto">
     </div>
 
     <!-- Navigation menu (desktop) -->
@@ -60,8 +60,114 @@
     </div>
 
 </section>
-    <!-- Buttons Section -->
-<div class="flex justify-center gap-6 py-10 bg-slate-50">
+  
+<!----------------------who we are------------------------>
+ <section class="py-20 bg-slate-50">
+  <div class="container mx-auto px-6 text-center">
+
+    <!-- Logo -->
+    <img src="assets/img/imagelogo.png" alt="Novo Medical Logo" class="mx-auto mb-6 w-20 h-20 object-contain">
+
+    <h2 id="who are we title" class="text-3xl font-bold text-teal-700 mb-6">Who We Are</h2>
+
+    <p id= "who are we p"class="max-w-3xl mx-auto text-slate-600 leading-relaxed">
+      <span class="text-teal-800 font-bold"> Novo Medical </span> is a professional medical supplies distributor and importer serving the Egyptian healthcare sector.
+      We provide high-quality medical devices, disposables, pharmaceuticals, herbal and cosmetic healthcare products,
+      sourced from trusted international manufacturers and compliant with Egyptian regulations.
+    </p>
+
+  </div>
+</section>
+
+<!--------------------------------Products Section----------------------------->
+<section id="products" class="py-20 bg-slate-50">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-teal-700 mb-4">Our Products</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto">Explore our comprehensive range of medical supplies and healthcare products</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10">
+      <button onclick="filterProducts('all')" class="filter-btn px-6 py-2 rounded-full bg-teal-600 text-white font-medium transition-all">All Products</button>
+      <button onclick="filterProducts('disposables')" class="filter-btn px-6 py-2 rounded-full bg-white text-slate-700 border border-slate-300 font-medium hover:bg-teal-50 transition-all">Disposables</button>
+      <button onclick="filterProducts('pharmaceuticals')" class="filter-btn px-6 py-2 rounded-full bg-white text-slate-700 border border-slate-300 font-medium hover:bg-teal-50 transition-all">Pharmaceuticals</button>
+      <button onclick="filterProducts('herbal')" class="filter-btn px-6 py-2 rounded-full bg-white text-slate-700 border border-slate-300 font-medium hover:bg-teal-50 transition-all">Herbal</button>
+      <button onclick="filterProducts('cosmetic')" class="filter-btn px-6 py-2 rounded-full bg-white text-slate-700 border border-slate-300 font-medium hover:bg-teal-50 transition-all">Cosmetic</button>
+    </div>
+
+    <!-- Products Grid -->
+    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <script>
+fetch('http://localhost:3000/products')
+  .then(res => res.json())
+  .then(data => {
+    const container = document.getElementById('productsGrid');
+   data.products.forEach(product => {
+      container.innerHTML += `
+         <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+      <div class="relative h-48 overflow-hidden bg-gray-100">
+        <img 
+          src="${product.image || 'assets/img/placeholder.png'}" 
+          alt="${product.name}" 
+          class="w-full h-full object-cover"
+          onerror="this.src='assets/img/placeholder.jpg'"
+        >
+        ${product.category ? `
+          <span class="absolute top-2 right-2 bg-teal-600 text-white text-xs px-3 py-1 rounded-full">
+            ${product.category}
+          </span>
+        ` : ''}
+      </div>
+      <div class="p-6">
+        <h3 class="text-xl font-semibold text-teal-700 mb-2">${product.name}</h3>
+        <p class="text-gray-600 text-sm mb-4 line-clamp-2">${product.description || 'No description available'}</p>
+        <div class="flex justify-between items-center mt-4">
+          <span class="text-base font-bold text-teal-600">${product.brand || 'Contact for price'}</span>
+          <button 
+            onclick="viewProductDetails(${product.id})" 
+            class="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-colors text-sm font-medium">
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+      `;
+    });
+  });
+</script>
+    </div>
+
+    <!-- Show More Button -->
+    <div class="text-center">
+      <button id="showMoreBtn" onclick="toggleShowAll()" class="px-8 py-3 bg-teal-600 text-white rounded-xl font-semibold shadow-lg hover:bg-teal-700 hover:scale-105 transition-all duration-300">
+        Show All Products
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!----------------call to action----------------------->
+<section class="py-20 bg-slate-50">
+  <div class="container mx-auto px-6 text-center">
+
+   
+
+    <h2 id="call to action" class="text-3xl font-bold text-teal-700 mb-6">Call To Action</h2>
+
+    <p id="pcall" class="max-w-3xl mx-auto text-slate-600 leading-relaxed">
+     Looking for a reliable medical supply partner in Egypt?
+Contact Promed EG today and let us support your healthcare facility.
+    </p>
+
+  </div>
+</section>
+  <!-- Buttons Section -->
+<div id="contact" class="flex justify-center gap-6 py-10">
+  
   <a href="#contact"
      class="bg-teal-600 text-white px-8 py-4 rounded-xl text-lg font-semibold
             shadow-md hover:bg-teal-700 hover:scale-105 transition-all duration-300">
@@ -73,63 +179,142 @@
             shadow-md hover:bg-teal-600 hover:text-white hover:scale-105 transition-all duration-300">
      Our Products
   </a>
+  
 </div>
 
-
-     
-<!-----------who we are--------->
-     <section class="py-20 bg-slate-50">
-      
+<!-------------------- Why Choose Promed EG -------------------->
+<section class="py-20 bg-white">
   <div class="container mx-auto px-6 text-center">
-      
-    <h2 class="text-3xl font-bold text-teal-700 mb-6">Who We Are</h2>
-    <p class="max-w-3xl mx-auto text-slate-600 leading-relaxed">
-      <span class="text-teal-800 font-bold"> Novo Medical </span>is a professional medical supplies distributor and importer serving the Egyptian healthcare sector.
-      We provide high-quality medical devices, disposables, pharmaceuticals, herbal and cosmetic healthcare products,
-      sourced from trusted international manufacturers and compliant with Egyptian regulations.
-    </p>
-     
-  </div>
-</section>
-<section id="categories" class="py-20">
-  <div class="container mx-auto px-6 text-center">
-    <h2 class="text-3xl font-bold text-teal-700 mb-10">Our Product Categories</h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      
-      <div class="p-6 border rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold mb-3">Medical Disposables</h3>
-        <a href="disposables.html" class="text-teal-600 font-medium">View Products →</a>
+    <h2 class="text-3xl font-bold text-teal-700 mb-10">Why Choose NOVOMedical</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div class="p-6 bg-slate-50 rounded-xl shadow hover:shadow-lg transition">
+        <i class="ri-shield-check-line text-4xl text-teal-600 mb-4"></i>
+        <h3 class="font-semibold text-lg mb-2">Trusted Distributor & Importer</h3>
+        <p class="text-slate-600">Reliable source for certified medical and healthcare products.</p>
       </div>
 
-      <div class="p-6 border rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold mb-3">Medicines & Pharmaceuticals</h3>
-        <a href="pharma.html" class="text-teal-600 font-medium">View Products →</a>
+      <div class="p-6 bg-slate-50 rounded-xl shadow hover:shadow-lg transition">
+        <i class="ri-global-line text-4xl text-teal-600 mb-4"></i>
+        <h3 class="font-semibold text-lg mb-2">International Quality Standards</h3>
+        <p class="text-slate-600">All products meet global safety and performance standards.</p>
       </div>
 
-      <div class="p-6 border rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold mb-3">Herbal Products</h3>
-        <a href="herbal.html" class="text-teal-600 font-medium">View Products →</a>
+      <div class="p-6 bg-slate-50 rounded-xl shadow hover:shadow-lg transition">
+        <i class="ri-hospital-line text-4xl text-teal-600 mb-4"></i>
+        <h3 class="font-semibold text-lg mb-2">MOH Compliance</h3>
+        <p class="text-slate-600">Fully compliant with Egyptian Ministry of Health regulations.</p>
       </div>
 
-      <div class="p-6 border rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="font-semibold mb-3">Medical Cosmetic Products</h3>
-        <a href="cosmetic.html" class="text-teal-600 font-medium">View Products →</a>
+      <div class="p-6 bg-slate-50 rounded-xl shadow hover:shadow-lg transition">
+        <i class="ri-truck-line text-4xl text-teal-600 mb-4"></i>
+        <h3 class="font-semibold text-lg mb-2">Fast & Reliable Logistics</h3>
+        <p class="text-slate-600">Efficient supply chain ensuring on-time delivery.</p>
+      </div>
+
+      <div class="p-6 bg-slate-50 rounded-xl shadow hover:shadow-lg transition">
+        <i class="ri-hand-heart-line text-4xl text-teal-600 mb-4"></i>
+        <h3 class="font-semibold text-lg mb-2">Long-term Partnerships</h3>
+        <p class="text-slate-600">Building trusted relationships with hospitals and clinics.</p>
       </div>
 
     </div>
+
   </div>
 </section>
 
 </main>
+
+<!--------------------------------Footer Section----------------------------->
+<footer class="bg-teal-500 text-white py-16">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+      
+      <!-- Company Info -->
+      <div>
+        <img src="assets/img/novologo1.png" alt="Novo Medical Logo" class="h-16 mb-4">
+        <h3 class="text-xl font-bold mb-4">Novo Medical</h3>
+        <p class="text-teal-100 leading-relaxed">Your trusted partner in medical supplies and healthcare solutions across Egypt.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2">
+          <li><a href="#home" class="text-teal-100 hover:text-white transition-colors">Home</a></li>
+          <li><a href="#about" class="text-teal-100 hover:text-white transition-colors">About Us</a></li>
+          <li><a href="#products" class="text-teal-100 hover:text-white transition-colors">Products</a></li>
+          <li><a href="#categories" class="text-teal-100 hover:text-white transition-colors">Categories</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact Information -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-3">
+            <i class="ri-mail-line text-xl text-teal-300 mt-1"></i>
+            <div>
+              <p class="text-teal-100">Email:</p>
+              <a href="mailto:info@novomedical.eg" class="hover:black transition-colors">info@novomedical.eg</a>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="ri-phone-line text-xl text-teal-300 mt-1"></i>
+            <div>
+              <p class="text-teal-100">Phone:</p>
+              <a href="tel:+201234567890" class="hover:text-white transition-colors">+20 123 456 7890</a>
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <i class="ri-map-pin-line text-xl text-teal-300 mt-1"></i>
+            <div>
+              <p class="text-teal-100">Address:</p>
+              <p class="hover:text-white transition-colors">Cairo, Egypt</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+        <div class="flex gap-4 mb-6">
+          <a href="#" class="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-white hover:text-teal-800 transition-all duration-300">
+            <i class="ri-facebook-fill text-xl"></i>
+          </a>
+          <a href="#" class="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-white hover:text-teal-800 transition-all duration-300">
+            <i class="ri-instagram-line text-xl"></i>
+          </a>
+          <a href="#" class="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-white hover:text-teal-800 transition-all duration-300">
+            <i class="ri-linkedin-fill text-xl"></i>
+          </a>
+          <a href="#" class="w-10 h-10 bg-teal-700 rounded-full flex items-center justify-center hover:bg-white hover:text-teal-800 transition-all duration-300">
+            <i class="ri-whatsapp-line text-xl"></i>
+          </a>
+        </div>
+        <p class="text-teal-100 text-sm">Stay connected for the latest updates and products</p>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-teal-700 mt-12 pt-8 text-center">
+      <p class="text-teal-200">© 2024 Novo Medical. All rights reserved. | Professional Medical Supplies Distribution</p>
+    </div>
+  </div>
+</footer>
+
+
   <!----<h1 class="text-3xl font-bold bg-teal-500 text-white container font-opensans">
     Hello Hana! welcome habibty!
   </h1>--->
 
 
   <!--------------------------------------------------------------------main.js-------------------------------------------->
-  <script src="main.js">
+  <script src="main.js"></script>
 
-  </script>
 </body>
 </html>

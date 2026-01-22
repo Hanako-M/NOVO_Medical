@@ -12,7 +12,8 @@ const auth_router = require("./routes/auth.routes.js")
 const mongoose=require("mongoose")
 const app=express()
 const port=3000 
-
+// In your main server file (app.js or server.js)
+ const cors = require('cors');
 dotenv.config();  //load env variables
 
 
@@ -26,15 +27,16 @@ app.use(express.json())
 "photo":"123pop1y2e",
 "quantity":3
 }*/ 
-//app.get(checkUser);
+app.get(checkUser);
+app.use(cors());
 app.use(cookieParser());
     connectDB().then(()=>{
-        
-    app.use("/",auth_router);
+         app.use("/products",prod_router);
+    app.use("/auth",auth_router);
     app.use(checkUser);
     app.use("/admin",admin_router);
-    app.use("/product",prod_router);
-
+   
+//{ "name":"panadol","description":"medicine for nothing", "image":"https://cdn11.bigcommerce.com/s-vhzbg5/products/1508/images/3752/apilzb7wx__29984.1499347631.500.750.jpg?c=2", "category":"medicine","brand":"ck" } 
      app.listen(port,async()=>{ console.log(`server is running successfully, Hana!`)})
      }).catch(err => {
      console.error("❌ ERROR: Database connection failed");
