@@ -230,9 +230,9 @@ langBtn.addEventListener("click", () => {
   
   // Update show more button
   const showMoreBtn = document.getElementById('showMoreBtn');
-  if (showMoreBtn && showMoreBtn.textContent.includes('Show')) {
+  
     showMoreBtn.textContent = t.showAllProducts;
-  }
+  
   
   // Update Call to Action section
   if (elements.callToActionTitle) {

@@ -47,10 +47,15 @@ const signIn=async(req,res)=>{
          console.log(found.password);
          if(auth){
             const token=createtoken(found._id);
-            res.cookie("token",token,{httpOnly:true,maxAge:60*60*24*1000});
+           res.cookie("token", token, {
+            httpOnly: true,    // prevents JS access
+            sameSite: "lax",   // works for localhost cross-port
+            secure: false,     // must be false on HTTP (localhost)
+            path: "/",maxAge:60*60*24*1000});
             console.log("the token is",token);
             res.status(200).send({
               "success": true,
+              "token":token,
               "admin":{
                 "id":found._id,
                 "username":found.username||found.name,

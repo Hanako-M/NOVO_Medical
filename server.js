@@ -28,7 +28,10 @@ app.use(express.json())
 "quantity":3
 }*/ 
 app.get(checkUser);
-app.use(cors());
+app.use(cors({
+  origin: 'http://127.0.0.1:5500',
+  credentials: true
+}));
 app.use(cookieParser());
     connectDB().then(()=>{
          app.use("/products",prod_router);
