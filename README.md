@@ -1,8 +1,9 @@
 # NOVO Medical
 
-**Professional Medical Supplies Distribution Platform**
+**Professional Medical Supplies Distribution Platform**<img width="1892" height="822" alt="Screenshot 2026-01-29 130138" src="https://github.com/user-attachments/assets/f4083768-7d56-4003-a073-6b1dfb1f7a9e" />
+NOVO Medical is a full-stack web platform for managing and distributing medical supplies. It is built with a secure role-based system where Admins, Vendors, and Customers have different permissions, and all critical operations (adding, editing, deleting products, managing orders) are protected by authentication and authorization middleware.
 
-NOVO Medical is a web-based platform designed for the distribution and management of medical supplies. It serves clinics, hospitals, and healthcare providers by offering a reliable, secure, and efficient system for browsing products, managing orders, and handling vendor–customer interactions.
+The system is bilingual (Arabic & English) and targets clinics, hospitals, and healthcare suppliers.
 
 ---
 
@@ -11,7 +12,8 @@ NOVO Medical is a web-based platform designed for the distribution and managemen
 NOVO Medical aims to digitalize and simplify the medical supply chain by providing:
 - A modern product catalog for medical equipment and consumables
 - Secure authentication for admins, vendors, and customers
-- Inventory and order management
+- Inventory and order management<img width="1895" height="828" alt="Screenshot 2026-01-29 130201" src="https://github.com/user-attachments/assets/6842b272-4f76-46f5-be1b-a98a6abe2a8d" />
+
 - Compliance with healthcare distribution standards
 - A scalable backend architecture ready for future integrations (payments, delivery tracking, analytics)
 
@@ -19,20 +21,34 @@ NOVO Medical aims to digitalize and simplify the medical supply chain by providi
 
 ## 🧱 System Architecture
 
-The project follows a clean separation between frontend and backend:
+## Backend (Node.js + Express + MongoDB)
 
-### Backend
-- **Node.js + Express**
-- RESTful API architecture
-- JWT-based authentication & authorization
-- Role-based access control (Admin, Vendor, Customer)
-- MongoDB for data persistence
+- RESTful API structure with MVC pattern:
+
+- controllers/ – business logic (products, users, orders, auth)
+
+- routes/ – role-protected endpoints
+
+- models/ – MongoDB schemas (User, Product, Order, Category)
+
+- middleware/ – JWT verification, role checking, error handling
+
+- Key features:
+
+ - JWT authentication with refresh & expiration handling
+
+ - Secure role validation for every sensitive endpoint
+
+- Product stock validation
+
+- Order lifecycle management (Pending → Approved → Shipped → Completed)
+
 
 ### Frontend
 - HTML, Tailwind CSS, and Vanilla JavaScript
 - Responsive UI for dashboards and product listings
 - API integration using Fetch
-
+<img width="1448" height="807" alt="Screenshot 2026-01-29 132209" src="https://github.com/user-attachments/assets/20ff24de-c8ed-448b-b445-a9cd23eb19ec" />
 ---
 
 ## 🔐 Authentication & Security
@@ -51,22 +67,8 @@ The project follows a clean separation between frontend and backend:
 - Categories and stock tracking
 - Image upload and detailed descriptions
 
-### 2. User Roles
+### 2. Roles
 - **Admin:** Full system control
-- **Vendor:** Manage own products and orders
-- **Customer:** Browse products and place orders
-
-### 3. Order System
-- Create and track orders
-- Order status (Pending, Approved, Shipped, Completed)
-- Vendor–Customer communication
-
-### 4. Wallet & Payments (Planned)
-- Internal wallet system
-- Secure payment gateway integration
-- Transaction history
-
----
 
 ## ⚙️ Tech Stack
 
@@ -94,42 +96,11 @@ novo-medical/
 │
 ├── frontend/
 │   ├── index.html
-│   ├── dashboard.html
 │   ├── js/
 │   └── assets/
 │
 └── README.md
 ```
-
----
-
-## 🛠️ Setup Instructions
-
-1. Clone the repository
-```bash
-git clone https://github.com/your-username/novo-medical.git
-```
-
-2. Install backend dependencies
-```bash
-cd backend
-npm install
-```
-
-3. Configure environment variables
-```env
-PORT=3000
-MONGO_URI=your_mongodb_connection
-JWT_SECRET=your_secret_key
-```
-
-4. Run the server
-```bash
-npm start
-```
-
-5. Open frontend
-Open `index.html` in your browser or serve it using a local server.
 
 ---
 
@@ -140,12 +111,6 @@ To become a trusted digital hub connecting medical suppliers with healthcare pro
 ## 🧭 Mission
 
 To empower local and international medical brands with a reliable online distribution platform that simplifies operations and enhances accessibility to essential healthcare products.
-
----
-
-## 👨‍💻 Author
-
-Developed by **NOVO Medical Team**
 
 ---
 
